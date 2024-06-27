@@ -36,9 +36,11 @@ router.post('/sign-up', async (req, res) => {
     req.body.password = hashedPassword;
   
     // All ready to create the new user!
-    await User.create(req.body);
+
+    
+    const user = await User.create(req.body);
+    res.send(`Thanks for signing up ${user.username}`);
   
-    res.redirect('/auth/sign-in');
   } catch (error) {
     console.log(error);
     res.redirect('/');

@@ -3,8 +3,44 @@ const router = express.Router();
 
 const User = require('../models/user.js');
 
-router.get('/', (req, res) => {
-    res.render('foods/index.ejs')
+router.get('/', async (req, res) => {
+    try {    
+        res.render('foods/index.ejs')
+    } catch (error) {
+        console.log(error);
+        res.redirect('/')
+    }
 });
 
+// router.get('/new', async (req, res) => {
+//     try {
+//         res.render('foods/new.ejs');
+//     } catch (error) {
+//         console.log(error);
+//         res.redirect('/')
+//     }
+// });
+
+// router.post('/', async (req, res) => {
+//     try {
+//         const currentUser = await User.findById(req.session.user._id);
+//         currentUser.foods.push(req.body);
+//         await currentUser.save();
+//         res.redirect(`/users/${currentUser._id}/foods`);
+//     } catch (error) {
+//         console.log(error);
+//         res.redirect('/')
+//     }
+// })
+
 module.exports = router;
+
+
+
+// Index	‘/users/:userId/foods’	GET
+// New	‘/users/:userId/foods/new’	GET
+// Create	‘/users/:userId/foods’	POST
+// Show	‘/users/:userId/foods/:itemId’	GET
+// Edit	‘/users/:userId/foods/:itemId/edit’	GET
+// Update	‘/users/:userId/foods/:itemId’	PUT
+// Delete	‘/users/:userId/foods/:itemId’	DELETE
