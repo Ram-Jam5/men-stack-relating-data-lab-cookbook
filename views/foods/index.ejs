@@ -7,8 +7,14 @@
   </head>
   <body>
     <%- include('./partials/_navbar.ejs') %>
-
     <h1>Welcome to my Pantry</h1>
     <a href="/users/<%= user._id%>/foods/new">Add a food</a>
+    <ul>
+      <% pantry.forEach(pantry => { %>
+       <li>
+        <%= pantry.food %>
+       </li>
+      <% }) %>
+    </ul>
   </body>
 </html>
