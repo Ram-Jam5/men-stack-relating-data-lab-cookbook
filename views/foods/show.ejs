@@ -4,11 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><%= pantry._id %></title>
+  <title><%= pantry.food %></title>
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
   <h1> <%= pantry.food %> </h1>
+  <a href="/users/<%= user._id %>/foods/<%= pantry._id %>/edit">
+    Edit this food
+  </a>
   <form
     action="/users/<%= user._id %>/foods/<%= pantry._id %>?_method=DELETE"
     method="POST">
