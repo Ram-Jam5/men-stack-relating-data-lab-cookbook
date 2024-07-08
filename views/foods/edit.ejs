@@ -7,8 +7,8 @@
 </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1>Edit</h1>
-    <form action="/users/<%= user._id %>/foods?_method=PUT" 
+    <h1>Edit <%= pantry.food %></h1>
+    <form action="/users/<%= user._id %>/foods/<%= pantry._id %>?_method=PUT" 
         method="POST"
     >
       <label for="food">Food:</label>
