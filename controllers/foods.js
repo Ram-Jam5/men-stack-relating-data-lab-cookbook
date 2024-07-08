@@ -15,6 +15,20 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/users', async (req, res) => {
+    const allUsers = await User.find();
+    console.log(allUsers)
+    res.render('users/index.ejs', {
+        user: allUsers,
+    })
+})
+
+router.get('/users/:userId', async (req, res) => {
+    const currentUser = await User.findById(req.params.userId);
+    res.render('users/show.ejs', {
+        user: currentUser,
+    })
+});
 
 router.get('/:foodId', async (req, res) => {
     try {
@@ -98,6 +112,6 @@ module.exports = router;
 // New	‘/users/:userId/foods/new’	GET !
 // Create	‘/users/:userId/foods’	POST !
 // Show	‘/users/:userId/foods/:itemId’	GET !
-// Edit	‘/users/:userId/foods/:itemId/edit’	GET
-// Update	‘/users/:userId/foods/:itemId’	PUT
-// Delete	‘/users/:userId/foods/:itemId’	DELETE
+// Edit	‘/users/:userId/foods/:itemId/edit’	GET !
+// Update	‘/users/:userId/foods/:itemId’	PUT !
+// Delete	‘/users/:userId/foods/:itemId’	DELETE !
