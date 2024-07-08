@@ -15,6 +15,32 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+router.get('/:foodId', async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.session.user._id);
+        const food = currentUser.pantry.id(req.params.foodId);
+        res.render('foods/show.ejs', {
+            pantry: food,
+        });
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+});
+
+router.delete('/:foodId', async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.session.user._id);
+        currentUser.pantry.id(req.params.foodId).deleteOne();
+        await currentUser.save();
+        res.redirect(`/users/${currentUser._id}/foods`)
+    } catch (error) {
+        console.log(error);
+        res.redirect('/')
+    }
+});
+
 router.get('/new', async (req, res) => {
     try {
         res.render('foods/new.ejs');
@@ -23,6 +49,7 @@ router.get('/new', async (req, res) => {
         res.redirect('/')
     }
 });
+
 
 router.post('/',async (req, res) => {
     console.log(req.body)
@@ -41,10 +68,10 @@ module.exports = router;
 
 
 
-// Index	‘/users/:userId/foods’	GET
-// New	‘/users/:userId/foods/new’	GET
-// Create	‘/users/:userId/foods’	POST
-// Show	‘/users/:userId/foods/:itemId’	GET
+// Index	‘/users/:userId/foods’	GET !
+// New	‘/users/:userId/foods/new’	GET !
+// Create	‘/users/:userId/foods’	POST !
+// Show	‘/users/:userId/foods/:itemId’	GET !
 // Edit	‘/users/:userId/foods/:itemId/edit’	GET
 // Update	‘/users/:userId/foods/:itemId’	PUT
 // Delete	‘/users/:userId/foods/:itemId’	DELETE
