@@ -25,8 +25,10 @@ router.get('/users', async (req, res) => {
 
 router.get('/users/:userId', async (req, res) => {
     const currentUser = await User.findById(req.params.userId);
+    const food = currentUser.pantry
     res.render('users/show.ejs', {
         user: currentUser,
+        pantry: food,
     })
 });
 
